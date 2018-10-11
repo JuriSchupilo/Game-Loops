@@ -1,0 +1,37 @@
+
+//NOTES: The hysteresisRadius should be chosen to be half the noise range (1ms/2.0 on windows, for example)
+
+//C++ pseudo code:
+ 
+                                 //begin: update mechanism 
+void update(double dt)
+{
+  timeAccu+= dt;
+  int numUpdates = 0;
+
+  while(true)
+  {                                          // If a "fixpoint" is too close above the threshold, move the threshold "down"
+		if((timeAccu >= updateInterval + hysteresisRadius) &&
+		   (timeAccu <  updateInterval + 5.0 * hysteresisRadius) )
+		{
+		   triggerOffset = -hysteresisRadius;
+		}
+                                             // If a "fixpoint" is too close below the threshold, move the threshold "up"
+		if((timeAccu >= updateInterval - 5.0 * hysteresisRadius) &&
+		   (timeAccu <  updateInterval - hysteresisRadius) )
+		{
+		   triggerOffset = hysteresisRadius;
+		}
+
+	  if (timeAccu < updateInterval + triggerOffset)
+	  {
+	        break;
+	  }
+
+	  numUpdates++;
+	  timeAccu -= updateInterval;
+  }
+  
+  return numUpdates;
+}
+                                     //end: update mechanism
