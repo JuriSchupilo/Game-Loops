@@ -1,5 +1,5 @@
 
-//NOTES: The hysteresisRadius should be chosen to be half the noise range (1ms/2.0 on windows, for example)
+//NOTES: hysteresisRadius should be chosen to be half the noise range (1ms/2.0 on windows, for example)
 // "5.0 * hysteresisRadius" is not a guess value, but derived analytically as the upper bound to ensure stability
 // (will be shown in the thesis)
 
