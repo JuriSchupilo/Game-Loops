@@ -1,5 +1,7 @@
 
 //NOTES: The hysteresisRadius should be chosen to be half the noise range (1ms/2.0 on windows, for example)
+// "5.0 * hysteresisRadius" is not a guess value, but derived analytically as the upper bound to ensure stability
+// (will be shown in the thesis)
 
 //C++ pseudo code:
  
@@ -10,13 +12,13 @@ void update(double dt)
   int numUpdates = 0;
 
   while(true)
-  {                                          // If a "fixpoint" is too close above the threshold, move the threshold "down"
+  {                                          // If a "fixpoint" is too close above the threshold, move the threshold "down".
          if((timeAccu >= updateInterval + hysteresisRadius) &&
 	     (timeAccu <  updateInterval + 5.0 * hysteresisRadius) )
 	  {
             triggerOffset = -hysteresisRadius;
 	  }
-                                             // If a "fixpoint" is too close below the threshold, move the threshold "up"
+                                             // If a "fixpoint" is too close below the threshold, move the threshold "up".
 	  if((timeAccu >= updateInterval - 5.0 * hysteresisRadius) && (timeAccu <  updateInterval - hysteresisRadius) )
 	  {
 	    triggerOffset = hysteresisRadius;
