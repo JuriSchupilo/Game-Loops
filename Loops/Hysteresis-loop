@@ -12,8 +12,7 @@ void update(double dt)
 
   while(true)
   {                                          // If a "fixpoint" is too close above the threshold, move the threshold "down".
-         if((m_timeAccu >= m_updateInterval + m_hysteresisRadius) &&
-	     (timeAccu <  m_updateInterval + 5.0 * m_hysteresisRadius) )
+         if((m_timeAccu >= m_updateInterval + m_hysteresisRadius) && (timeAccu <  m_updateInterval + 5.0 * m_hysteresisRadius) )
 	  {
             m_triggerOffset = -m_hysteresisRadius;
 	  }
