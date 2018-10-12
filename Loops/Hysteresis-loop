@@ -3,34 +3,33 @@
 // "5.0 * hysteresisRadius" is not a guess value, but derived analytically as the upper bound to ensure stability
 // (will be shown in the thesis)
 
-//C++ pseudo code:
  
                                  //begin: update mechanism 
 void update(double dt)
 {
-  timeAccu+= dt;
+  m_timeAccu+= dt;
   int numUpdates = 0;
 
   while(true)
   {                                          // If a "fixpoint" is too close above the threshold, move the threshold "down".
-         if((timeAccu >= updateInterval + hysteresisRadius) &&
-	     (timeAccu <  updateInterval + 5.0 * hysteresisRadius) )
+         if((m_timeAccu >= m_updateInterval + m_hysteresisRadius) &&
+	     (timeAccu <  m_updateInterval + 5.0 * m_hysteresisRadius) )
 	  {
-            triggerOffset = -hysteresisRadius;
+            m_triggerOffset = -m_hysteresisRadius;
 	  }
                                              // If a "fixpoint" is too close below the threshold, move the threshold "up".
-	  if((timeAccu >= updateInterval - 5.0 * hysteresisRadius) && (timeAccu <  updateInterval - hysteresisRadius) )
+	  if((m_timeAccu >= m_updateInterval - 5.0 * m_hysteresisRadius) && (m_timeAccu < m_updateInterval - m_hysteresisRadius) )
 	  {
-	    triggerOffset = hysteresisRadius;
+	    m_triggerOffset = m_hysteresisRadius;
 	  }
 
-	  if (timeAccu < updateInterval + triggerOffset)
+	  if (m_timeAccu < m_updateInterval + m_triggerOffset)
 	  {
 	    break;
 	  }
 
 	  numUpdates++;
-	  timeAccu -= updateInterval;
+	  m_timeAccu -= m_updateInterval;
   }
   
   return numUpdates;
