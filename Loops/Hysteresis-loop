@@ -1,6 +1,6 @@
 
 //NOTES: m_hysteresisRadius should be chosen to be half the noise range (1ms/2.0 on windows, for example)
-// "5.0 * m_hysteresisRadius" is not an educated guess as the upper bound to ensure stability (will be proved in the thesis)
+// "5.0 * m_hysteresisRadius" is an educated guess as the upper bound to ensure stability (will be proved in the thesis)
 
  
                                  //begin: update mechanism 
